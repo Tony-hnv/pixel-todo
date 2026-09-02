@@ -2,11 +2,7 @@ package com.pixeltodo.app.util
 
 import android.content.Context
 import androidx.work.*
-import com.pixeltodo.app.data.WeatherApi
-import com.pixeltodo.app.data.WeatherResponse
 import com.pixeltodo.app.data.local.PixelTodoDatabase
-import com.pixeltodo.app.data.local.toDomain
-import com.pixeltodo.app.domain.model.WeatherCondition
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
@@ -19,8 +15,8 @@ class WeatherCheckWorker(
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         try {
             val database = PixelTodoDatabase.getDatabase(applicationContext)
-            val todos = database.todoDao().getTodosWithWeatherAlarm().toString()
-            
+            database.todoDao().getTodosWithWeatherAlarm()
+
             // Check weather and trigger notifications
             // In production, use actual weather API key
             Result.success()

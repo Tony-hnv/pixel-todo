@@ -1,0 +1,35 @@
+package com.pixeltodo.app.domain.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.time.LocalDateTime
+
+@Entity(tableName = "todos")
+data class Todo(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+    val title: String,
+    val description: String = "",
+    val priority: Priority = Priority.MEDIUM,
+    val isCompleted: Boolean = false,
+    val dueDate: LocalDateTime? = null,
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val alarmTime: LocalDateTime? = null,
+    val isAlarmEnabled: Boolean = false,
+    val repeatType: RepeatType = RepeatType.NONE,
+    val weatherCondition: WeatherCondition? = null,
+    val weatherLocation: String = "",
+    val isWeatherAlarmEnabled: Boolean = false
+)
+
+enum class Priority {
+    LOW, MEDIUM, HIGH
+}
+
+enum class RepeatType {
+    NONE, DAILY, WEEKDAYS, WEEKLY
+}
+
+enum class WeatherCondition {
+    SUNNY, CLOUDY, RAINY, SNOWY, THUNDERSTORM
+}

@@ -23,9 +23,9 @@ enum class Priority {
 }
 
 enum class RepeatType {
-    NONE, DAILY, WEEKLY, MONTHLY
+    NONE, DAILY, WEEKDAYS, WEEKLY
 }
 
 enum class WeatherCondition {
-    RAIN, SNOW, SUNNY, CLOUDY, WINDY
+    SUNNY, CLOUDY, RAINY, SNOWY, THUNDERSTORM
 }

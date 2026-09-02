@@ -8,33 +8,35 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.pixeltodo.app.domain.model.Todo
 import com.pixeltodo.app.ui.screens.EditTodoScreen
 import com.pixeltodo.app.ui.screens.TodoListScreen
 import com.pixeltodo.app.ui.theme.PixelBackground
 import com.pixeltodo.app.ui.theme.PixelTodoTheme
-import com.pixeltodo.app.viewmodel.TodoViewModel
 import com.pixeltodo.app.util.WeatherCheckWorker
+import com.pixeltodo.app.viewmodel.TodoViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        
+
         // Schedule weather check worker
         WeatherCheckWorker.schedule(this)
-        
+
         setContent {
             PixelTodoTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = PixelBackground
                 ) {
-                    PixelTodoApp()
+                    PixelTodoNavHost()
                 }
             }
         }
@@ -51,12 +53,12 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun PixelTodoApp() {
+fun PixelTodoNavHost() {
     val navController = rememberNavController()
-    val viewModel = remember { TodoViewModel(getApplication<Application>()) }
-    
+    val viewModel: TodoViewModel = viewModel()
+
     var editingTodo by remember { mutableStateOf<Long?>(null) }
-    
+
     NavHost(
         navController = navController,
         startDestination = Screen.List.route
@@ -71,7 +73,7 @@ fun PixelTodoApp() {
                 }
             )
         }
-        
+
         composable(Screen.Add.route) {
             EditTodoScreen(
                 todo = null,
@@ -83,7 +85,7 @@ fun PixelTodoApp() {
                 onBack = { navController.popBackStack() }
             )
         }
-        
+
         composable(
             route = Screen.Edit.route,
             arguments = listOf(
@@ -91,12 +93,12 @@ fun PixelTodoApp() {
             )
         ) { backStackEntry ->
             val todoId = backStackEntry.arguments?.getLong(Screen.Edit.ARG) ?: 0L
-            var todo by remember { mutableStateOf<com.pixeltodo.app.domain.model.Todo?>(null) }
-            
+            var todo by remember { mutableStateOf<Todo?>(null) }
+
             LaunchedEffect(todoId) {
                 todo = viewModel.getTodoById(todoId)
             }
-            
+
             todo?.let { t ->
                 EditTodoScreen(
                     todo = t,

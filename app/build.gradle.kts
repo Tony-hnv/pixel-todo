@@ -22,6 +22,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+        }
         release {
             isMinifyEnabled = true
             proguardFiles(
@@ -104,21 +108,4 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-}
-android.signingConfigs {
-    debug {
-        storeFile file("${System.getProperty("user.home")}/.android/debug.keystore")
-        storePassword "android"
-        keyAlias "androiddebugkey"
-        keyPassword "android"
-    }
-}
-
-android.buildTypes {
-    debug {
-        signingConfig signingConfigs.debug
-    }
-    release {
-        signingConfig signingConfigs.debug
-    }
 }

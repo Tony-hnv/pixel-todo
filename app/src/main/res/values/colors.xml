@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pixel_background">#1A1A2E</color>
+    <color name="pixel_card">#16213E</color>
+    <color name="pixel_blue">#4A90D9</color>
+    <color name="pixel_yellow">#FFD93D</color>
+    <color name="pixel_green">#6BCB77</color>
+    <color name="pixel_red">#FF6B6B</color>
+    <color name="pixel_text">#EAEAEA</color>
+    <color name="pixel_gray">#95A5A6</color>
+</resources>

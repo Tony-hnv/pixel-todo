@@ -1,12 +1,8 @@
 package com.pixeltodo.app.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 
-@Entity(tableName = "todos")
 data class Todo(
-    @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val title: String,
     val description: String = "",
@@ -27,9 +23,9 @@ enum class Priority {
 }
 
 enum class RepeatType {
-    NONE, DAILY, WEEKDAYS, WEEKLY
+    NONE, DAILY, WEEKLY, MONTHLY
 }
 
 enum class WeatherCondition {
-    SUNNY, CLOUDY, RAINY, SNOWY, THUNDERSTORM
+    RAIN, SNOW, SUNNY, CLOUDY, WINDY
 }

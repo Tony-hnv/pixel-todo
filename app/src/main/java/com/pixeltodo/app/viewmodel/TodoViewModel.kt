@@ -19,7 +19,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     init {
         val database = PixelTodoDatabase.getDatabase(application)
         repository = TodoRepository(database.todoDao())
-        todos = repository.getAllTodos()
+        todos = repository.allTodos
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
     }
 

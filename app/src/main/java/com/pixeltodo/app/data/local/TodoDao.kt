@@ -29,3 +29,21 @@ interface TodoDao {
     @Query("SELECT * FROM todos WHERE isWeatherAlarmEnabled = 1")
     fun getTodosWithWeatherAlarm(): Flow<List<TodoEntity>>
 }
+
+@Entity(tableName = "todos")
+data class TodoEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
+    val title: String,
+    val description: String = "",
+    val priority: String = "MEDIUM",
+    val isCompleted: Boolean = false,
+    val dueDate: String? = null,
+    val createdAt: String = "",
+    val alarmTime: Long? = null,
+    val isAlarmEnabled: Boolean = false,
+    val repeatType: String = "NONE",
+    val weatherCondition: String? = null,
+    val weatherLocation: String = "",
+    val isWeatherAlarmEnabled: Boolean = false
+)

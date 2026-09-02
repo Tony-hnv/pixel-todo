@@ -1,4 +1,4 @@
-package com.pixeltodo.app.ui.screens
+package com.pixeltodo.app.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,8 +11,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -153,6 +153,7 @@ fun PixelTextField(
         label = { Text(label, fontFamily = FontFamily.Monospace) },
         modifier = modifier
             .border(2.dp, PixelBlue, RoundedCornerShape(4.dp)),
+        textStyle = TextStyle(fontFamily = FontFamily.Monospace),
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = PixelBlue,
             unfocusedBorderColor = PixelGray,
@@ -160,7 +161,6 @@ fun PixelTextField(
             unfocusedTextColor = PixelText,
             cursorColor = PixelYellow
         ),
-        fontFamily = FontFamily.Monospace,
         singleLine = singleLine,
         shape = RoundedCornerShape(4.dp)
     )
